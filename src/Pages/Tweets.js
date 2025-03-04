@@ -1,5 +1,5 @@
 // TODO : useState를 react로 부터 import 합니다.
-import React /* TODO */ from 'react';
+import React, { useState } /* TODO */ from 'react';
 import Footer from '../Footer';
 import Tweet from '../Components/Tweet';
 import './Tweets.css';
@@ -7,19 +7,32 @@ import dummyTweets from '../static/dummyData';
 
 const Tweets = () => {
   // TODO : 새로 트윗을 작성하고 전송할 수 있게 useState를 적절히 활용하세요.
+  const [tweets, setTweets] = useState(dummyTweets);
+  const [username, setUsername] = useState('Bob');
+  const [message, setMessage] = useState('');
 
   const handleButtonClick = (event) => {
+    if (message.trim() === '') return;
+
     const tweet = {};
+    id: tweets.length + 1,
+      username: username,
+        content: message,
+          picture: 'https://randomuser.me/api/portraits/men/98.jpg',
+            createdAt: new Date().toISOString(),
     // TODO : Tweet button 엘리먼트 클릭시 작동하는 함수를 완성하세요.
     // 트윗 전송이 가능하게 작성해야 합니다.
   };
 
+
   const handleChangeUser = (event) => {
     // TODO : Tweet input 엘리먼트에 입력 시 작동하는 함수를 완성하세요.
+    setUsername(event.target.value);
   };
 
   const handleChangeMsg = (event) => {
     // TODO : Tweet textarea 엘리먼트에 입력 시 작동하는 함수를 완성하세요.
+    setMessage(event.target.value)
   };
 
   return (
@@ -39,12 +52,17 @@ const Tweets = () => {
                   className="tweetForm__input--username"
                 ></input>
                 TODO : 트윗을 작성할 수 있는 textarea 엘리먼트를 작성하세요.
-              </div>
-              <div className="tweetForm__count" role="status">
-                <span className="tweetForm__count__text">
-                  {/* TODO : 트윗 총 개수를 보여줄 수 있는 Counter를 작성하세요. */}
-                  {'total: '}
-                </span>
+                <textarea
+                  placeholder="what'sup"
+                  value={message}
+                  onChange={handleChangeUser}
+                  placeholder="your username here.."
+                  className="tweetForm__input--message"
+                  className="tweetForm__count" role="status">
+                  <span className="tweetForm__count__text">
+                    {/* TODO : 트윗 총 개수를 보여줄 수 있는 Counter를 작성하세요. */}
+                    {'total: '}
+                  </span>
               </div>
             </div>
             <div className="tweetForm__submit">
